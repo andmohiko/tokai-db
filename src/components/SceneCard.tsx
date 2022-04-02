@@ -1,16 +1,17 @@
-import Image from 'next/image'
-import { Box, Button, Img, Text } from '@chakra-ui/react'
-import styles from '../styles/Home.module.css'
-import { Scene } from '~/entities'
+import { Box, Button, Image, Text } from '@chakra-ui/react'
+import { Scene } from '@/entities'
 
 interface Props {
   scene: Scene
 }
 
-const SceneCard = ({ scene }): React.ReactElement => {
+const SceneCard = ({ scene }: Props): React.ReactElement => {
   return (
-    <Box>
-      <Img src={scene}></Img>
+    <Box w="400px" h="300px">
+      <Image src={scene.screenshotURL} />
+      <Text fontSize='2xl'>{scene.title}</Text>
+      <Text fontSize='base'>いいね: {scene.likes}</Text>
+      <Text fontSize='lg'>タグ {scene.tags.map(tag => <Text>{tag}</Text>)}</Text>
     </Box>
   )
 }

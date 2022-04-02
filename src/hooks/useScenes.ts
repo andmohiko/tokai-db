@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { collection, doc, query, orderBy, Firestore, DocumentData, Timestamp } from 'firebase/firestore'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
-import { Scene } from '~/entities'
-import { isDefined } from '~/utils/type'
+import { Scene } from '@/entities'
+import { isDefined } from '@/utils/type'
 // import { convertDate } from '../utils/date'
 
 const ScenesCollection = 'scenes'
@@ -48,6 +48,7 @@ const sceneFactory = (doc: DocumentData): Scene | undefined => {
     likes: data.likes,
     screenshotURL: data.screenshotURL,
     tags: data.tags,
-    title: data.title
+    title: data.title,
+    updatedAt: data.updatedAt
   }
 }
