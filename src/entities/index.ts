@@ -1,9 +1,19 @@
+export type DocId = String;
+
+export interface Tag {
+  tagId: DocId;
+  createdAt: Date;
+  label: string;
+  scenesCount: number;
+  updatedAt: Date;
+}
+
 export interface Scene {
-  sceneId: string;
+  sceneId: DocId;
   createdAt: Date;
   likes: number;
   screenshotURL: string;
-  tags: string[];
+  tags: Tag["label"][];
   title: string;
   updatedAt: Date;
 }
