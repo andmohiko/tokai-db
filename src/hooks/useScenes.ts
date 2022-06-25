@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react'
-import { collection, doc, query, orderBy, Firestore, DocumentData, Timestamp } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  query,
+  orderBy,
+  Firestore,
+  DocumentData,
+  Timestamp
+} from 'firebase/firestore'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { Scene } from '@/entities'
 import { isDefined } from '@/utils/type'
@@ -9,16 +17,18 @@ const ScenesCollection = 'scenes'
 
 export const useScenes = (db: Firestore) => {
   const [scenes, setScenes] = useState<Scene[]>()
-  const [value, loading, error] = useCollection(collection(db, ScenesCollection))
+  const [value, loading, error] = useCollection(
+    collection(db, ScenesCollection)
+  )
 
   useEffect(() => {
     if (!value) return
     const scenes = value.docs
       .map((doc) => {
-        return sceneFactory(doc);
+        return sceneFactory(doc)
       })
-      .filter(isDefined);
-    setScenes(scenes);
+      .filter(isDefined)
+    setScenes(scenes)
   }, [value])
 
   return scenes
@@ -30,11 +40,13 @@ export const useScene = (db: Firestore, docId: string) => {
 
   useEffect(() => {
     if (!value) return
-    setScene(sceneFactory(value));
+    setScene(sceneFactory(value))
   }, [value])
 
   return {
-    scene, loading, error
+    scene,
+    loading,
+    error
   }
 }
 
