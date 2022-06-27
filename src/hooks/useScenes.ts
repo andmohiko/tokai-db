@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import {
   collection,
+  addDoc,
   doc,
   query,
   orderBy,
   Firestore,
-  DocumentData,
-  Timestamp
+  DocumentData
 } from 'firebase/firestore'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
-import { Scene } from '@/entities'
+import { CreateSceneDto, Scene } from '@/entities'
 import { isDefined } from '@/utils/type'
 // import { convertDate } from '../utils/date'
 
@@ -48,6 +48,14 @@ export const useScene = (db: Firestore, docId: string) => {
     loading,
     error
   }
+}
+
+export const useCreateScene = (db: Firestore) => {
+  const createScene = async (dto: CreateSceneDto) => {
+    const sceneRef = await addDoc(collection(db, ScenesCollection), dto)
+    return sceneRef.id
+  }
+  return createScene
 }
 
 const sceneFactory = (doc: DocumentData): Scene | undefined => {
