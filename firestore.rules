@@ -6,13 +6,14 @@ service cloud.firestore {
     }
     match /scenes/{sceneId} {
       allow read;
-      allow create: if requestData().size() == 6
+      allow create: if requestData().size() == 7
                         && 'createdAt' in requestData() && requestData().createdAt is timestamp
                         && 'likes' in requestData() && requestData().likes is number
                         && 'screenshotURL' in requestData() && requestData().screenshotURL is string
                         && 'tags' in requestData() && requestData().tags is list
                         && 'title' in requestData() && requestData().title is string
-                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp;
+                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp
+                        && 'videoName' in requestData() && requestData().videoName is string;
     }
 
     match /tags/{tagId} {

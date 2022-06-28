@@ -15,23 +15,26 @@ import { isDefined } from '@/utils/type'
 
 const ScenesCollection = 'scenes'
 
-export const useScenes = (db: Firestore) => {
-  const [scenes, setScenes] = useState<Scene[]>()
-  const [value, loading, error] = useCollection(
-    collection(db, ScenesCollection)
-  )
+export const useFetchScenes = (db: Firestore) => {
+  const fetchScenes = () => {
+    const [scenes, setScenes] = useState<Scene[]>()
+    const [value, loading, error] = useCollection(
+      collection(db, ScenesCollection)
+    )
 
-  useEffect(() => {
-    if (!value) return
-    const scenes = value.docs
-      .map((doc) => {
-        return sceneFactory(doc)
-      })
-      .filter(isDefined)
-    setScenes(scenes)
-  }, [value])
+    useEffect(() => {
+      if (!value) return
+      const scenes = value.docs
+        .map((doc) => {
+          return sceneFactory(doc)
+        })
+        .filter(isDefined)
+      setScenes(scenes)
+    }, [value])
 
-  return scenes
+    return scenes
+  }
+  return fetchScenes
 }
 
 export const useScene = (db: Firestore, docId: string) => {
@@ -69,6 +72,7 @@ const sceneFactory = (doc: DocumentData): Scene | undefined => {
     screenshotURL: data.screenshotURL,
     tags: data.tags,
     title: data.title,
-    updatedAt: data.updatedAt
+    updatedAt: data.updatedAt,
+    videoName: data.videoName
   }
 }
