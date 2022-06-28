@@ -41,3 +41,14 @@ export interface CreateSceneDto {
 export interface CreateSceneFormDto {
   title: Scene['title']
 }
+
+export interface CreateTagDto {
+  createdAt: FieldValue
+  label: Tag['label']
+  scenesCount: Tag['scenesCount']
+  updatedAt: FieldValue
+}
+
+export interface CreateTagFormDto {
+  label: Tag['label']
+}
