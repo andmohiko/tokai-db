@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
   collection,
+  addDoc,
   doc,
   query,
   orderBy,
@@ -8,7 +9,7 @@ import {
   DocumentData
 } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { Tag } from '@/entities'
+import { Tag, CreateTagDto } from '@/entities'
 import { isDefined } from '@/utils/type'
 // import { convertDate } from '../utils/date'
 
@@ -33,6 +34,14 @@ export const useFetchTags = (db: Firestore) => {
     return tags
   }
   return fetchTags
+}
+
+export const useCreateTag = (db: Firestore) => {
+  const createTag = async (dto: CreateTagDto) => {
+    const tagRef = await addDoc(collection(db, TagsCollection), dto)
+    return tagRef.id
+  }
+  return createTag
 }
 
 const tagFactory = (doc: DocumentData): Tag | undefined => {
