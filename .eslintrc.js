@@ -1,4 +1,3 @@
-/*eslint-env node*/
 module.exports = {
   root: true,
   env: {
@@ -6,54 +5,74 @@ module.exports = {
     es2020: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
+    'next/core-web-vitals',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'prettier',
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 2020,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint", "react", "import"],
+  plugins: ['@typescript-eslint', 'react', 'import'],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
       typescript: {
-        config: "tsconfig.json",
+        config: 'tsconfig.json',
+        project: './frontend',
         alwaysTryTypes: true,
       },
     },
   },
   rules: {
-    "@typescript-eslint/ban-types": [
-      "error",
+    '@typescript-eslint/ban-types': [
+      'error',
       {
         types: {
-          "{}": false,
+          '{}': false,
         },
       },
     ],
-    "react/prop-types": ["off"],
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": ["error", { extensions: [".jsx", ".tsx"] }],
-    "import/order": ["error"],
-    "prettier/prettier": [
-      "error",
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'react/prop-types': ['off'],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
+    'import/order': [
+      'error',
       {
-        trailingComma: "none",
-        endOfLine: "lf",
-        semi: false,
-        singleQuote: true,
-        printWidth: 80,
-        tabWidth: 2,
+        groups: [
+          'builtin',
+          'external',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
+        ],
+        pathGroups: [
+          {
+            pattern: '{react,react-dom/**,react-router-dom}',
+            group: 'builtin',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        alphabetize: {
+          order: 'asc',
+        },
+        'newlines-between': 'always',
       },
     ],
   },
-};
+}
