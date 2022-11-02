@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import {
   collection,
   addDoc,
@@ -6,11 +7,13 @@ import {
   query,
   orderBy,
   Firestore,
-  DocumentData
+  DocumentData,
 } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { Tag, CreateTagDto } from '@/entities'
-import { isDefined } from '@/utils/type'
+
+import { Tag, CreateTagDto } from '~/entities'
+import { db } from '~/lib/firebase'
+import { isDefined } from '~/utils/type'
 // import { convertDate } from '../utils/date'
 
 const TagsCollection = 'tags'
@@ -19,7 +22,7 @@ export const useFetchTags = (db: Firestore) => {
   const fetchTags = () => {
     const [tags, setTags] = useState<Tag[]>()
     const [value, loading, error] = useCollection(
-      collection(db, TagsCollection)
+      collection(db, TagsCollection),
     )
 
     useEffect(() => {
@@ -36,7 +39,7 @@ export const useFetchTags = (db: Firestore) => {
   return fetchTags
 }
 
-export const useCreateTag = (db: Firestore) => {
+export const useCreateTag = () => {
   const createTag = async (dto: CreateTagDto) => {
     const tagRef = await addDoc(collection(db, TagsCollection), dto)
     return tagRef.id
@@ -53,6 +56,6 @@ const tagFactory = (doc: DocumentData): Tag | undefined => {
     createdAt: data.createdAt,
     label: data.label,
     scenesCount: data.scenesCount,
-    updatedAt: data.updatedAt
+    updatedAt: data.updatedAt,
   }
 }
