@@ -1,4 +1,4 @@
-import { Stack } from '@mantine/core'
+import { AppShell, Header, Stack, Title } from '@mantine/core'
 
 import { HeadComponent } from '~/components/Head'
 
@@ -7,10 +7,26 @@ type Props = {
 }
 
 export const SimpleLayout = ({ children }: Props) => (
-  <div>
+  <AppShell
+    padding="md"
+    header={
+      <Header height={60} p="xs">
+        <Title order={1}>東海DB</Title>
+      </Header>
+    }
+    styles={(theme) => ({
+      main: {
+        backgroundColor: theme.colors.gray[0],
+      },
+    })}
+  >
     <HeadComponent />
-    <Stack justify="center" align="center" style={{ minHeight: '100vh' }}>
+    <Stack
+      justify="center"
+      align="center"
+      style={{ minHeight: 'calc(100vh - 100px)' }}
+    >
       {children}
     </Stack>
-  </div>
+  </AppShell>
 )
