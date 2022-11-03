@@ -64,7 +64,7 @@ export const useCreateScene = () => {
   return createScene
 }
 
-const sceneFactory = (doc: DocumentData): Scene | undefined => {
+export const sceneFactory = (doc: DocumentData): Scene | undefined => {
   const data = doc.data()
   if (!data) return
 

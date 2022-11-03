@@ -1,26 +1,20 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
-import { Scene } from '@/entities'
-import { TagLabel } from '@/components/TagButton'
+import { Box, Group, Image, Stack, Text } from '@mantine/core'
+
+import { TagLabel } from '~/components/TagButton'
+import { Scene } from '~/entities'
 
 interface Props {
   scene: Scene
 }
 
-export const SceneCard = ({ scene }: Props): React.ReactElement => {
-  return (
-    <Box w="400px" h="300px">
-      <Image src={scene.screenshotURL} />
-      <Text fontSize="2xl">{scene.title}</Text>
-      <Text fontSize="base">いいね: {scene.likes}</Text>
-      <Flex>
-        {scene.tags.map((tag) => {
-          return (
-            <Flex key={tag} mr={1}>
-              <TagLabel tagLabel={tag} />
-            </Flex>
-          )
-        })}
-      </Flex>
-    </Box>
-  )
-}
+export const SceneCard = ({ scene }: Props): React.ReactElement => (
+  <Stack>
+    <Image src={scene.screenshotURL} alt={scene.title} />
+    <Text size="lg">{scene.title}</Text>
+    <Group spacing="xs">
+      {scene.tags.map((tag) => (
+        <TagLabel key={tag} tagLabel={tag} />
+      ))}
+    </Group>
+  </Stack>
+)
