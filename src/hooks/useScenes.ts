@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import {
   collection,
   addDoc,
@@ -6,11 +7,13 @@ import {
   query,
   orderBy,
   Firestore,
-  DocumentData
+  DocumentData,
 } from 'firebase/firestore'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
-import { CreateSceneDto, Scene } from '@/entities'
-import { isDefined } from '@/utils/type'
+
+import { CreateSceneDto, Scene } from '~/entities'
+import { db } from '~/lib/firebase'
+import { isDefined } from '~/utils/type'
 // import { convertDate } from '../utils/date'
 
 const ScenesCollection = 'scenes'
@@ -19,7 +22,7 @@ export const useFetchScenes = (db: Firestore) => {
   const fetchScenes = () => {
     const [scenes, setScenes] = useState<Scene[]>()
     const [value, loading, error] = useCollection(
-      collection(db, ScenesCollection)
+      collection(db, ScenesCollection),
     )
 
     useEffect(() => {
@@ -49,11 +52,11 @@ export const useScene = (db: Firestore, docId: string) => {
   return {
     scene,
     loading,
-    error
+    error,
   }
 }
 
-export const useCreateScene = (db: Firestore) => {
+export const useCreateScene = () => {
   const createScene = async (dto: CreateSceneDto) => {
     const sceneRef = await addDoc(collection(db, ScenesCollection), dto)
     return sceneRef.id
@@ -73,6 +76,6 @@ const sceneFactory = (doc: DocumentData): Scene | undefined => {
     tags: data.tags,
     title: data.title,
     updatedAt: data.updatedAt,
-    videoName: data.videoName
+    videoName: data.videoName,
   }
 }

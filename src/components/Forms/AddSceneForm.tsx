@@ -13,9 +13,8 @@ import { IconUpload, IconPhoto, IconX } from '@tabler/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 
-import { UploadImage } from './UploadImage'
-
 import { useFileInput } from '~/hooks/useFileInput'
+import { useCreateScene } from '~/hooks/useScenes'
 import { serverTimestamp } from '~/lib/firebase'
 
 const AddTagSchema = z.object({
@@ -26,6 +25,7 @@ const AddTagSchema = z.object({
 type AddTagType = z.infer<typeof AddTagSchema>
 
 export const AddSceneForm = () => {
+  const createScene = useCreateScene()
   const {
     register,
     handleSubmit,
@@ -35,8 +35,14 @@ export const AddSceneForm = () => {
   const [fileURL, onChange] = useFileInput('/scenes/')
 
   const onSubmit: SubmitHandler<AddTagType> = (data) => {
-    console.log('submit', {
-      ...data,
+    createScene({
+      createdAt: serverTimestamp,
+      likes: 0,
+      screenshotURL: fileURL,
+      tags: [],
+      title: data.title,
+      updatedAt: serverTimestamp,
+      videoName: data.videoName,
     })
   }
 
@@ -47,13 +53,13 @@ export const AddSceneForm = () => {
         <Stack spacing="lg">
           <Stack>
             <TextInput
-              label="タイトル"
+              label="この場面に名前をつけるなら？"
               placeholder="クシシウ〜ウ"
               error={errors.title?.message}
               {...register('title')}
             />
             <TextInput
-              label="動画名"
+              label="どの動画？"
               placeholder="文理対決でろ過器作るやつ"
               error={errors.videoName?.message}
               {...register('videoName')}
