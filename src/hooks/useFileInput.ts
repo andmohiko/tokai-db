@@ -2,16 +2,18 @@ import { useState, useCallback } from 'react'
 
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 
+import type { FileWithPath } from 'react-dropzone'
+
 import { storage } from '~/lib/firebase'
 
 export const useFileInput = (
   path: string,
   defaultValue = '',
-): [string, (files: any) => Promise<string>] => {
+): [string, (files: FileWithPath[]) => Promise<string>] => {
   const [fileURL, setFileURL] = useState(defaultValue)
 
   const onChange = useCallback(
-    async (files: any): Promise<string> => {
+    async (files: FileWithPath[]): Promise<string> => {
       if (!files || files.length === 0) {
         return ''
       }
