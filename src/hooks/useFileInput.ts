@@ -1,16 +1,17 @@
-import { useState, useCallback, ChangeEvent } from 'react'
+import { useState, useCallback } from 'react'
+
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-import { storage } from '@/lib/firebase'
+
+import { storage } from '~/lib/firebase'
 
 export const useFileInput = (
   path: string,
-  defaultValue = ''
-): [string, (e: ChangeEvent<HTMLInputElement>) => Promise<string>] => {
+  defaultValue = '',
+): [string, (files: any) => Promise<string>] => {
   const [fileURL, setFileURL] = useState(defaultValue)
 
   const onChange = useCallback(
-    async (e: ChangeEvent<HTMLInputElement>): Promise<string> => {
-      const files = e.target.files
+    async (files: any): Promise<string> => {
       if (!files || files.length === 0) {
         return ''
       }
@@ -25,7 +26,7 @@ export const useFileInput = (
       }
       return ''
     },
-    [setFileURL]
+    [path, setFileURL],
   )
 
   return [fileURL, onChange]
