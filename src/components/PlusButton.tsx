@@ -13,6 +13,9 @@ export const PlusButton = ({ onClick }: Props) => {
       radius="xl"
       variant="filled"
       onClick={onClick}
+      style={{
+        boxShadow: '2px 8px 20px 2px rgba(0, 0, 0, 0.15)',
+      }}
     >
       <AiOutlinePlus size={24} />
     </ActionIcon>
