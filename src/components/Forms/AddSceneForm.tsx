@@ -24,7 +24,11 @@ const AddTagSchema = z.object({
 
 type AddTagType = z.infer<typeof AddTagSchema>
 
-export const AddSceneForm = () => {
+type Props = {
+  onClose: () => void
+}
+
+export const AddSceneForm = ({ onClose }: Props) => {
   const createScene = useCreateScene()
   const {
     register,
@@ -32,7 +36,7 @@ export const AddSceneForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<AddTagType>({ resolver: zodResolver(AddTagSchema) })
 
-  const [fileURL, onChange] = useFileInput('/scenes/')
+  const [fileURL, onChange] = useFileInput('/images/scenes/')
 
   const onSubmit: SubmitHandler<AddTagType> = (data) => {
     createScene({
@@ -44,6 +48,7 @@ export const AddSceneForm = () => {
       updatedAt: serverTimestamp,
       videoName: data.videoName,
     })
+    onClose()
   }
 
   return (

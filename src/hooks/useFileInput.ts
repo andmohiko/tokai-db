@@ -20,7 +20,7 @@ export const useFileInput = (
 
       const file = files[0]
       try {
-        const fileURL = await uploadImage(path, file)
+        const fileURL = await uploadImage(`${path}/${file.path}`, file)
         setFileURL(fileURL)
         return fileURL
       } catch {

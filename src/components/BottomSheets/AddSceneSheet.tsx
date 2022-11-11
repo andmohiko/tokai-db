@@ -26,6 +26,6 @@ export const AddSceneSheet = ({ opened, onClose }: Props) => (
       overflow: 'hidden',
     }}
   >
-    <AddSceneForm />
+    <AddSceneForm onClose={onClose} />
   </Modal>
 )
