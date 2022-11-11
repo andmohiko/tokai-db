@@ -52,19 +52,6 @@ export const AddSceneForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing="lg">
           <Stack>
-            <TextInput
-              label="この場面に名前をつけるなら？"
-              placeholder="クシシウ〜ウ"
-              error={errors.title?.message}
-              {...register('title')}
-            />
-            <TextInput
-              label="どの動画？"
-              placeholder="文理対決でろ過器作るやつ"
-              error={errors.videoName?.message}
-              {...register('videoName')}
-            />
-
             <Dropzone
               onDrop={onChange}
               onReject={(files) => console.log('rejected files', files)}
@@ -95,6 +82,18 @@ export const AddSceneForm = () => {
                 </Group>
               )}
             </Dropzone>
+            <TextInput
+              label="この場面に名前をつけるなら？"
+              placeholder="クシシウ〜ウ"
+              error={errors.title?.message}
+              {...register('title')}
+            />
+            <TextInput
+              label="どの動画？"
+              placeholder="文理対決でろ過器作るやつ"
+              error={errors.videoName?.message}
+              {...register('videoName')}
+            />
           </Stack>
           <Button type="submit" loading={isSubmitting}>
             作成する
