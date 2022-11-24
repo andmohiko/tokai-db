@@ -42,7 +42,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
   } = useForm<AddSceneType>({ resolver: zodResolver(AddSceneSchema) })
 
   const [fileURL, onChange] = useFileInput('/images/scenes/')
-  const [selectedTags, setSelectedTags] = useState<string[]>()
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const onSubmit: SubmitHandler<AddSceneType> = (data) => {
     console.log({
