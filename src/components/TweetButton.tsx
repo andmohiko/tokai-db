@@ -1,7 +1,11 @@
 import { Button } from '@mantine/core'
 import { IconBrandTwitter } from '@tabler/icons'
 
-export const TweetButton = () => {
+type Props = {
+  shareUrl: string
+}
+
+export const TweetButton = ({ shareUrl }: Props) => {
   const createShareUrl = (url: string): string => {
     const shareUrl = new URL('http://twitter.com/share')
     const urlParams = [['url', url]]
@@ -15,7 +19,7 @@ export const TweetButton = () => {
       component="a"
       target="_blank"
       rel="noopener noreferrer"
-      href={createShareUrl('#')}
+      href={createShareUrl(shareUrl)}
       leftIcon={<IconBrandTwitter size={15} />}
       styles={(theme) => ({
         root: {

@@ -12,8 +12,8 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SceneCard } from './SceneCard'
-import { SceneDetailCard } from './SceneDetailCard'
 
+import { SceneDetailModal } from '~/components/SceneDetailModal'
 import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
@@ -99,7 +99,7 @@ export const ScenesList = () => {
       />
 
       {selectedScene && (
-        <SceneDetailCard
+        <SceneDetailModal
           scene={selectedScene}
           opened={opened}
           onClose={handler.close}
