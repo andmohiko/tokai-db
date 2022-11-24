@@ -13,7 +13,8 @@ import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
 
-const SceneDetailPage = () => {
+const SceneDetailPage = ({ screenshotURL }: any) => {
+  console.log(screenshotURL)
   const router = useRouter()
   const [scene, setScene] = useState<Scene>()
   const sceneId =
@@ -57,6 +58,14 @@ const SceneDetailPage = () => {
       </Stack>
     </NoPlusLayout>
   )
+}
+
+export async function getServerSideProps({ query }: any) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/scenes/${query.id}`,
+  )
+  const ogpData = await res.json()
+  return { props: { screenshotURL: ogpData.data } }
 }
 
 export default SceneDetailPage
