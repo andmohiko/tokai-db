@@ -9,10 +9,11 @@ import {
   Stack,
   Text,
   TextInput,
-  Title
+  Title,
 } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
-import { IconUpload, IconPhoto, IconX } from '@tabler/icons'
+import { useDisclosure } from '@mantine/hooks'
+import { IconUpload, IconPhoto, IconX, IconHash } from '@tabler/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -34,6 +35,7 @@ type Props = {
 }
 
 export const AddSceneForm = ({ tags, onClose }: Props) => {
+  const [opened, { close, open }] = useDisclosure(false)
   const createScene = useCreateScene()
   const {
     register,
@@ -114,16 +116,33 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
               error={errors.videoName?.message}
               {...register('videoName')}
             />
-            <MultiSelect
-              data={tags.map(t => {
-                return {
-                  value: t.label,
-                  label: t.label
-                }
-              })}
-              label="誰が映ってますか？"
-              onChange={setSelectedTags}
-            />
+            <Stack
+              style={{
+                gap: 4,
+              }}
+            >
+              <MultiSelect
+                data={tags.map((t) => {
+                  return {
+                    value: t.label,
+                    label: t.label,
+                  }
+                })}
+                searchable
+                dropdownPosition="top"
+                label="誰が映っていますか？"
+                icon={<IconHash size={15} />}
+                onChange={setSelectedTags}
+              />
+              <Text
+                style={{
+                  color: '#888',
+                  fontSize: 10,
+                }}
+              >
+                タグの追加希望はお問い合わせからお願いします
+              </Text>
+            </Stack>
           </Stack>
           <Button type="submit" loading={isSubmitting}>
             作成する
