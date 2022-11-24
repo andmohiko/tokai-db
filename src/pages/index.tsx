@@ -1,10 +1,9 @@
 import { Stack } from '@mantine/core'
 
 import { ScenesList } from '~/components/ScenesList'
-// import { AddTagForm } from '~/components/Forms/AddTagForm'
 import { SimpleLayout } from '~/components/SimpleLayout'
 
-const newPage = () => {
+const IndexPage = () => {
   return (
     <SimpleLayout>
       <Stack>
@@ -15,4 +14,4 @@ const newPage = () => {
   )
 }
 
-export default newPage
+export default IndexPage

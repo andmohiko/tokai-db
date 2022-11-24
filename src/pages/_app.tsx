@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
+import Head from 'next/head'
+
+import type { AppProps } from 'next/app'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
