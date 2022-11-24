@@ -62,8 +62,8 @@ export const ScenesList = () => {
       <SimpleGrid
         cols={4}
         breakpoints={[
-          { maxWidth: 980, cols: 3, spacing: 'md' },
-          { maxWidth: 755, cols: 2, spacing: 'md' },
+          { maxWidth: 1340, cols: 3, spacing: 'md' },
+          { maxWidth: 960, cols: 2, spacing: 'md' },
           { maxWidth: 600, cols: 1, spacing: 'md' },
         ]}
         style={{
