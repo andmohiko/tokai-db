@@ -66,7 +66,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
             <Dropzone
               onDrop={onChange}
               onReject={(files) => console.log('rejected files', files)}
-              maxSize={3 * 1024 ** 3}
+              maxSize={100 * 1024 ** 2}
               accept={IMAGE_MIME_TYPE}
             >
               {fileURL ? (
