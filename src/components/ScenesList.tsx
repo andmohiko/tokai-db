@@ -32,10 +32,7 @@ export const ScenesList = () => {
     onChange,
   })
   const [value, loading, error] = useCollection(
-    query(
-      collection(db, ScenesCollection),
-      orderBy('createdAt', 'desc')
-    )
+    query(collection(db, ScenesCollection), orderBy('createdAt', 'desc')),
   )
 
   useEffect(() => {
@@ -55,10 +52,14 @@ export const ScenesList = () => {
     return <LoadingOverlay visible={loading} overlayBlur={2} />
 
   return (
-    <Stack justify='space-between' align="center" style={{
-      height: '100%',
-      paddingBottom: '96px'
-    }}>
+    <Stack
+      justify="space-between"
+      align="center"
+      style={{
+        height: '100%',
+        paddingBottom: '96px',
+      }}
+    >
       <SimpleGrid
         cols={4}
         breakpoints={[
@@ -67,7 +68,7 @@ export const ScenesList = () => {
           { maxWidth: 600, cols: 1, spacing: 'md' },
         ]}
         style={{
-          gap: 40
+          gap: 40,
         }}
       >
         {displayItems?.map((s) => (
