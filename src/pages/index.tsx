@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 
 import { Stack } from '@mantine/core'
 import { collection, orderBy, query } from 'firebase/firestore'
-import Head from 'next/head'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SimpleLayout } from '~/components/Layouts/SimpleLayout'
@@ -36,16 +35,6 @@ const IndexPage = () => {
 
   return (
     <SimpleLayout tags={tags}>
-      <Head>
-        <meta property="og:url" content="https://tokai-db.vercel.app/" />
-        <meta property="og:title" content="東海DB" />
-        <meta property="og:description" content="東海オンエア スクショ" />
-        <meta property="og:site_name" content="東海DB" />
-        <meta
-          property="og:image"
-          content="https://tokai-db.vercel.app/tokaidb.png"
-        />
-      </Head>
       <Stack
         style={{
           height: '100%',
