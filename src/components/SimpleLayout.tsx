@@ -4,12 +4,14 @@ import { useDisclosure } from '@mantine/hooks'
 import { AddSceneSheet } from '~/components/BottomSheets/AddSceneSheet'
 import { HeadComponent } from '~/components/Head'
 import { PlusButton } from '~/components/PlusButton'
+import { TagUI } from '~/entities'
 
 type Props = {
   children: React.ReactNode
+  tags: TagUI[]
 }
 
-export const SimpleLayout = ({ children }: Props) => {
+export const SimpleLayout = ({ children, tags }: Props) => {
   const [opened, handlers] = useDisclosure(false)
 
   return (
@@ -38,7 +40,7 @@ export const SimpleLayout = ({ children }: Props) => {
           {children}
         </Stack>
 
-        <AddSceneSheet opened={opened} onClose={handlers.close} />
+        <AddSceneSheet tags={tags} opened={opened} onClose={handlers.close} />
       </AppShell>
 
       <Group

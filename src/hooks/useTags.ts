@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
-import { Tag, CreateTagDto } from '~/entities'
+import { Tag, CreateTagDto, TagUI } from '~/entities'
 import { db } from '~/lib/firebase'
 import { isDefined } from '~/utils/type'
 // import { convertDate } from '../utils/date'
@@ -47,13 +47,14 @@ export const useCreateTag = () => {
   return createTag
 }
 
-const tagFactory = (doc: DocumentData): Tag | undefined => {
+export const tagFactory = (doc: DocumentData): TagUI | undefined => {
   const data = doc.data()
   if (!data) return
 
   return {
     tagID: doc.id,
     createdAt: data.createdAt,
+    isActive: false,
     label: data.label,
     scenesCount: data.scenesCount,
     updatedAt: data.updatedAt,
