@@ -2,9 +2,9 @@ import { AppShell, Group, Header, Stack, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 
 import { AddSceneSheet } from '~/components/BottomSheets/AddSceneSheet'
+import { PlusButton } from '~/components/Buttons/PlusButton'
 import Footer from '~/components/Footer'
 import { HeadComponent } from '~/components/Head'
-import { PlusButton } from '~/components/PlusButton'
 import { TagUI } from '~/entities'
 
 type Props = {

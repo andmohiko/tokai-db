@@ -1,7 +1,7 @@
 import { Group, Image, Stack, Text } from '@mantine/core'
 
-import { TagLabel } from '~/components/TagButton'
-import { TweetButton } from '~/components/TweetButton'
+import { TagLabel } from '~/components/Buttons/TagButton'
+import { TweetButton } from '~/components/Buttons/TweetButton'
 import { Scene } from '~/entities'
 
 interface Props {
