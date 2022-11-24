@@ -1,4 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { MantineProvider } from '@mantine/core'
 import Head from 'next/head'
 
 import type { AppProps } from 'next/app'
@@ -12,9 +13,18 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: 'light',
+        }}
+      >
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </MantineProvider>
     </>
   )
 }
