@@ -41,8 +41,12 @@ const IndexPage = () => {
 
   return (
     <SimpleLayout tags={tags}>
-      <Stack>
-        <ScenesList tags={tags} />
+      <Stack
+        style={{
+          height: '100%'
+        }}
+      >
+        <ScenesList />
       </Stack>
     </SimpleLayout>
   )

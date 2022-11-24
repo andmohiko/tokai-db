@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 import { LoadingOverlay, Pagination, SimpleGrid, Stack } from '@mantine/core'
 import { usePagination } from '@mantine/hooks'
@@ -7,22 +7,29 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SceneCard } from './SceneCard'
 
-import { Scene, TagUI } from '~/entities'
+import { Scene } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
 import { isDefined } from '~/utils/type'
 
 const ScenesCollection = 'scenes'
 
-type Props = {
-  tags: TagUI[]
-}
+const PAGE_SIZE = 3
 
-export const ScenesList = ({ tags }: Props) => {
+export const ScenesList = () => {
   const [scenes, setScenes] = useState<Scene[]>()
   const [page, onChange] = useState(1)
+  const displayItems = useMemo(() => {
+    return scenes?.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
+  }, [scenes, page])
+  const totalPages = useMemo(() => {
+    if (!scenes) {
+      return 1
+    }
+    return scenes.length / PAGE_SIZE + 1
+  }, [scenes])
   const pagination = usePagination({
-    total: 10,
+    total: totalPages,
     page,
     onChange,
   })
@@ -50,7 +57,11 @@ export const ScenesList = ({ tags }: Props) => {
     return <LoadingOverlay visible={loading} overlayBlur={2} />
 
   return (
-    <Stack align="center">
+    <Stack justify='space-between' align="center" style={{
+      border: '2px solid blue',
+      height: '100%',
+      paddingBottom: '96px'
+    }}>
       <SimpleGrid
         cols={4}
         spacing="lg"
@@ -60,14 +71,14 @@ export const ScenesList = ({ tags }: Props) => {
           { maxWidth: 600, cols: 1, spacing: 'sm' },
         ]}
       >
-        {scenes.map((s) => (
+        {displayItems?.map((s) => (
           <SceneCard key={s.sceneId} scene={s} />
         ))}
       </SimpleGrid>
       <Pagination
         page={pagination.active}
-        onChange={pagination.next}
-        total={10}
+        onChange={pagination.setPage}
+        total={totalPages}
       />
     </Stack>
   )

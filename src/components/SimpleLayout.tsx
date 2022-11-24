@@ -37,7 +37,10 @@ export const SimpleLayout = ({ children, tags }: Props) => {
         <Stack
           justify="center"
           align="center"
-          style={{ minHeight: 'calc(100vh - 140px)' }}
+          style={{
+            height: '100%',
+            minHeight: 'calc(100vh - 140px)'
+          }}
         >
           {children}
         </Stack>
@@ -52,7 +55,7 @@ export const SimpleLayout = ({ children, tags }: Props) => {
         position="center"
         style={{
           position: 'fixed',
-          bottom: 40,
+          bottom: 36,
           width: '100%',
         }}
       >
