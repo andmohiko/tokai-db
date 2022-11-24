@@ -1,9 +1,8 @@
 import { AppShell, Group, Header, Stack, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 
-import Footer from '../Footer'
-
 import { AddSceneSheet } from '~/components/BottomSheets/AddSceneSheet'
+import Footer from '~/components/Footer'
 import { HeadComponent } from '~/components/Head'
 import { PlusButton } from '~/components/PlusButton'
 import { TagUI } from '~/entities'
