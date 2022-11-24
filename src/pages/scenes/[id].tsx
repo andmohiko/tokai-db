@@ -16,16 +16,22 @@ const SceneDetailPage = () => {
   const [scene, setScene] = useState<Scene>()
   const sceneId =
     typeof router.query.id === 'string' ? router.query.id : undefined
-  console.log('sceneId')
 
   const [value, loading, error] = useDocument(
-    doc(db, ScenesCollection, 'eGpC9bg9LVJyFhJ6hvrO'),
+    doc(
+      db,
+      ScenesCollection,
+      router.isReady ? sceneId! : 'aKbruGTCyd5OsJFAv7To',
+    ),
   )
 
   useEffect(() => {
-    if (!value) return
+    if (!value || sceneId === 'aKbruGTCyd5OsJFAv7To') {
+      return
+    }
+
     setScene(sceneFactory(value))
-  }, [value])
+  }, [value, sceneId])
 
   if (loading || !scene)
     return <LoadingOverlay visible={loading} overlayBlur={2} />
