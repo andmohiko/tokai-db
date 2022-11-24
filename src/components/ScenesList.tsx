@@ -56,7 +56,6 @@ export const ScenesList = () => {
 
   return (
     <Stack justify='space-between' align="center" style={{
-      border: '2px solid blue',
       height: '100%',
       paddingBottom: '96px'
     }}>
