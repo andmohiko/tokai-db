@@ -61,12 +61,14 @@ export const ScenesList = () => {
     }}>
       <SimpleGrid
         cols={4}
-        spacing="lg"
         breakpoints={[
           { maxWidth: 980, cols: 3, spacing: 'md' },
-          { maxWidth: 755, cols: 2, spacing: 'sm' },
-          { maxWidth: 600, cols: 1, spacing: 'sm' },
+          { maxWidth: 755, cols: 2, spacing: 'md' },
+          { maxWidth: 600, cols: 1, spacing: 'md' },
         ]}
+        style={{
+          gap: 40
+        }}
       >
         {displayItems?.map((s) => (
           <SceneCard key={s.sceneId} scene={s} />
