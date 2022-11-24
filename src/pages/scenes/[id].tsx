@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Stack, Anchor } from '@mantine/core'
 import { doc } from 'firebase/firestore'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
@@ -12,7 +13,8 @@ import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
 
-const SceneDetailPage = () => {
+const SceneDetailPage = ({ screenshotURL }: any) => {
+  console.log(screenshotURL)
   const router = useRouter()
   const [scene, setScene] = useState<Scene>()
   const sceneId =
@@ -40,6 +42,10 @@ const SceneDetailPage = () => {
 
   return (
     <NoPlusLayout>
+      <Head>
+        <meta property="og:url" content={scene.screenshotURL} />
+      </Head>
+
       <Stack
         justify="space-between"
         style={{
@@ -52,6 +58,14 @@ const SceneDetailPage = () => {
       </Stack>
     </NoPlusLayout>
   )
+}
+
+export async function getServerSideProps({ query }: any) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/scenes/${query.id}`,
+  )
+  const ogpData = await res.json()
+  return { props: { screenshotURL: ogpData.data } }
 }
 
 export default SceneDetailPage
