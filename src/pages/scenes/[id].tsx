@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Stack, LoadingOverlay } from '@mantine/core'
+import { Stack, LoadingOverlay, Anchor } from '@mantine/core'
 import { doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useDocument } from 'react-firebase-hooks/firestore'
@@ -35,7 +35,16 @@ const SceneDetailPage = () => {
 
   return (
     <NoPlusLayout>
-      <SceneDetailCard scene={scene} />
+      <Stack
+        justify="space-between"
+        style={{
+          gap: 160,
+          textAlign: 'center',
+        }}
+      >
+        <SceneDetailCard scene={scene} />
+        <Anchor href="/">一覧へ戻る</Anchor>
+      </Stack>
     </NoPlusLayout>
   )
 }
