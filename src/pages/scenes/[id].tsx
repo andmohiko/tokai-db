@@ -36,9 +36,9 @@ const SceneDetailPage = ({ screenshotURL }: any) => {
     setScene(sceneFactory(value))
   }, [value, sceneId])
 
-  if (loading || !scene) return <LoadingScreen />
+  if (loading || !scene) return <LoadingScreen screenshotURL={screenshotURL} />
 
-  if (!value || error) return <LoadingScreen />
+  if (!value || error) return <LoadingScreen screenshotURL={screenshotURL} />
 
   return (
     <NoPlusLayout>

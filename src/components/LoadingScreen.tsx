@@ -1,16 +1,18 @@
 import { Loader, Stack } from '@mantine/core'
 import Head from 'next/head'
 
-import { HeadComponent } from '~/components/Head'
+import { NoPlusLayout } from './Layouts/NoPlusLayout'
 
-export const LoadingScreen = () => (
-  <>
-    <HeadComponent />
+type Props = {
+  screenshotURL?: string
+}
+
+export const LoadingScreen = ({
+  screenshotURL = 'https://tokai-db.vercel.app/tokaidb.png',
+}: Props) => (
+  <NoPlusLayout>
     <Head>
-      <meta
-        property="og:image"
-        content="https://tokai-db.vercel.app/tokaidb.png"
-      />
+      <meta property="og:image" content={screenshotURL} />
     </Head>
     <Stack
       justify="center"
@@ -21,5 +23,5 @@ export const LoadingScreen = () => (
     >
       <Loader size={60} />
     </Stack>
-  </>
+  </NoPlusLayout>
 )
