@@ -35,9 +35,7 @@ const SceneDetailPage = () => {
 
   return (
     <NoPlusLayout>
-      <Stack>
-        <SceneDetailCard scene={scene} />
-      </Stack>
+      <SceneDetailCard scene={scene} />
     </NoPlusLayout>
   )
 }
