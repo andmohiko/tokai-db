@@ -3,8 +3,8 @@ import { Button, Stack, TextInput, Title } from '@mantine/core'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useCreateTag } from '~/hooks/useTags'
-import { serverTimestamp } from '~/lib/firebase'
+// import { useCreateTag } from '~/hooks/useTags'
+// import { serverTimestamp } from '~/lib/firebase'
 
 const AddTagSchema = z.object({
   label: z.string().min(1, { message: 'タグを入力してください' }),
@@ -13,7 +13,7 @@ const AddTagSchema = z.object({
 type AddTagType = z.infer<typeof AddTagSchema>
 
 export const AddTagForm = () => {
-  const createTag = useCreateTag()
+  // const createTag = useCreateTag()
 
   const {
     register,
@@ -25,12 +25,12 @@ export const AddTagForm = () => {
     console.log('submit', {
       ...data,
     })
-    createTag({
-      createdAt: serverTimestamp,
-      label: data.label,
-      scenesCount: 0,
-      updatedAt: serverTimestamp,
-    })
+    // createTag({
+    //   createdAt: serverTimestamp,
+    //   label: data.label,
+    //   scenesCount: 0,
+    //   updatedAt: serverTimestamp,
+    // })
   }
 
   return (

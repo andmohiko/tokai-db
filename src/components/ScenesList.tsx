@@ -51,7 +51,6 @@ export const ScenesList = ({ tags }: Props) => {
 
   return (
     <Stack align="center">
-      {tags[0].label}
       <SimpleGrid
         cols={4}
         spacing="lg"

@@ -4,41 +4,40 @@ import {
   collection,
   addDoc,
   doc,
-  query,
-  orderBy,
   Firestore,
-  DocumentData,
 } from 'firebase/firestore'
-import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
+import { useDocument } from 'react-firebase-hooks/firestore'
+
+import type { DocumentData } from 'firebase/firestore'
 
 import { CreateSceneDto, Scene } from '~/entities'
 import { db } from '~/lib/firebase'
-import { isDefined } from '~/utils/type'
+// import { isDefined } from '~/utils/type'
 // import { convertDate } from '../utils/date'
 
 const ScenesCollection = 'scenes'
 
-export const useFetchScenes = (db: Firestore) => {
-  const fetchScenes = () => {
-    const [scenes, setScenes] = useState<Scene[]>()
-    const [value, loading, error] = useCollection(
-      collection(db, ScenesCollection),
-    )
+// export const useFetchScenes = (db: Firestore) => {
+//   const fetchScenes = () => {
+//     const [scenes, setScenes] = useState<Scene[]>()
+//     const [value, loading, error] = useCollection(
+//       collection(db, ScenesCollection),
+//     )
 
-    useEffect(() => {
-      if (!value) return
-      const scenes = value.docs
-        .map((doc) => {
-          return sceneFactory(doc)
-        })
-        .filter(isDefined)
-      setScenes(scenes)
-    }, [value])
+//     useEffect(() => {
+//       if (!value) return
+//       const scenes = value.docs
+//         .map((doc) => {
+//           return sceneFactory(doc)
+//         })
+//         .filter(isDefined)
+//       setScenes(scenes)
+//     }, [value])
 
-    return scenes
-  }
-  return fetchScenes
-}
+//     return scenes
+//   }
+//   return fetchScenes
+// }
 
 export const useScene = (db: Firestore, docId: string) => {
   const [scene, setScene] = useState<Scene>()
