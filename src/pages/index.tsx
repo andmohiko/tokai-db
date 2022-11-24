@@ -6,12 +6,10 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { ScenesList } from '~/components/ScenesList'
 import { SimpleLayout } from '~/components/SimpleLayout'
-import { TagUI } from '~/entities'
+import { TagUI, TagsCollection } from '~/entities'
 import { tagFactory } from '~/hooks/useTags'
 import { db } from '~/lib/firebase'
 import { isDefined } from '~/utils/type'
-
-const TagsCollection = 'tags'
 
 const IndexPage = () => {
   const [tags, setTags] = useState<TagUI[]>()

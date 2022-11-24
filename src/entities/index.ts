@@ -2,6 +2,10 @@ import { FieldValue } from 'firebase/firestore'
 
 export type DocId = string
 
+export const ScenesCollection = 'scenes'
+
+export const TagsCollection = 'tags'
+
 export interface Tag {
   tagID: DocId
   createdAt: Date

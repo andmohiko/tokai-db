@@ -7,12 +7,10 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SceneCard } from './SceneCard'
 
-import { Scene } from '~/entities'
+import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
 import { isDefined } from '~/utils/type'
-
-const ScenesCollection = 'scenes'
 
 const PAGE_SIZE = 3
 
