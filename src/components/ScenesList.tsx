@@ -1,11 +1,18 @@
 import { useState, useEffect, useMemo } from 'react'
 
-import { LoadingOverlay, Pagination, SimpleGrid, Stack } from '@mantine/core'
-import { usePagination } from '@mantine/hooks'
+import {
+  Box,
+  LoadingOverlay,
+  Pagination,
+  SimpleGrid,
+  Stack,
+} from '@mantine/core'
+import { useDisclosure, usePagination } from '@mantine/hooks'
 import { collection, orderBy, query } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SceneCard } from './SceneCard'
+import { SceneDetailCard } from './SceneDetailCard'
 
 import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
@@ -15,6 +22,8 @@ import { isDefined } from '~/utils/type'
 const PAGE_SIZE = 30
 
 export const ScenesList = () => {
+  const [opened, handler] = useDisclosure(false)
+  const [selectedScene, setSelectedScene] = useState<Scene>()
   const [scenes, setScenes] = useState<Scene[]>()
   const [page, onChange] = useState(1)
   const displayItems = useMemo(() => {
@@ -72,7 +81,15 @@ export const ScenesList = () => {
         }}
       >
         {displayItems?.map((s) => (
-          <SceneCard key={s.sceneId} scene={s} />
+          <Box
+            key={s.sceneId}
+            onClick={() => {
+              setSelectedScene(s)
+              handler.open()
+            }}
+          >
+            <SceneCard scene={s} />
+          </Box>
         ))}
       </SimpleGrid>
       <Pagination
@@ -80,6 +97,14 @@ export const ScenesList = () => {
         onChange={pagination.setPage}
         total={totalPages}
       />
+
+      {selectedScene && (
+        <SceneDetailCard
+          scene={selectedScene}
+          opened={opened}
+          onClose={handler.close}
+        />
+      )}
     </Stack>
   )
 }
