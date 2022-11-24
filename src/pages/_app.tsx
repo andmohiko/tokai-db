@@ -3,20 +3,25 @@ import { MantineProvider } from '@mantine/core'
 
 import type { AppProps } from 'next/app'
 
+import { HeadComponent } from '~/components/Head'
+
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        /** Put your mantine theme override here */
-        colorScheme: 'light',
-      }}
-    >
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </MantineProvider>
+    <>
+      <HeadComponent />
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: 'light',
+        }}
+      >
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </MantineProvider>
+    </>
   )
 }
 
