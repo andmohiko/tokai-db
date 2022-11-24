@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { Stack, LoadingOverlay, Anchor } from '@mantine/core'
+import { Stack, Anchor } from '@mantine/core'
 import { doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
 import { NoPlusLayout } from '~/components/Layouts/NoPlusLayout'
+import { LoadingScreen } from '~/components/LoadingScreen'
 import { SceneDetailCard } from '~/components/SceneDetailCard'
 import { Scene, ScenesCollection } from '~/entities'
 import { sceneFactory } from '~/hooks/useScenes'
@@ -33,11 +34,9 @@ const SceneDetailPage = () => {
     setScene(sceneFactory(value))
   }, [value, sceneId])
 
-  if (loading || !scene)
-    return <LoadingOverlay visible={loading} overlayBlur={2} />
+  if (loading || !scene) return <LoadingScreen />
 
-  if (!value || error)
-    return <LoadingOverlay visible={loading} overlayBlur={2} />
+  if (!value || error) return <LoadingScreen />
 
   return (
     <NoPlusLayout>

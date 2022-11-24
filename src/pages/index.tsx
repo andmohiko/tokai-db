@@ -5,6 +5,7 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
 import { SimpleLayout } from '~/components/Layouts/SimpleLayout'
+import { LoadingScreen } from '~/components/LoadingScreen'
 import { ScenesList } from '~/components/ScenesList'
 import { TagUI, TagsCollection } from '~/entities'
 import { tagFactory } from '~/hooks/useTags'
@@ -28,11 +29,9 @@ const IndexPage = () => {
     setTags(scenes)
   }, [value])
 
-  if (loading || !tags)
-    return <LoadingOverlay visible={loading} overlayBlur={2} />
+  if (loading || !tags) return <LoadingScreen />
 
-  if (!value || error)
-    return <LoadingOverlay visible={loading} overlayBlur={2} />
+  if (!value || error) return <LoadingScreen />
 
   return (
     <SimpleLayout tags={tags}>
