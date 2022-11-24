@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Stack, Anchor } from '@mantine/core'
 import { doc } from 'firebase/firestore'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
@@ -40,6 +41,9 @@ const SceneDetailPage = () => {
 
   return (
     <NoPlusLayout>
+      <Head>
+        <meta property="og:image" content={scene.screenshotURL} />
+      </Head>
       <Stack
         justify="space-between"
         style={{
