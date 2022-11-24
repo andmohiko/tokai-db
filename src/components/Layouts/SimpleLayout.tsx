@@ -1,7 +1,7 @@
 import { AppShell, Group, Header, Stack, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 
-import Footer from './Footer'
+import Footer from '../Footer'
 
 import { AddSceneSheet } from '~/components/BottomSheets/AddSceneSheet'
 import { HeadComponent } from '~/components/Head'
@@ -39,7 +39,7 @@ export const SimpleLayout = ({ children, tags }: Props) => {
           align="center"
           style={{
             height: '100%',
-            minHeight: 'calc(100vh - 140px)'
+            minHeight: 'calc(100vh - 140px)',
           }}
         >
           {children}
