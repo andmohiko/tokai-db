@@ -12,7 +12,6 @@ import {
   Title,
 } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
-import { useDisclosure } from '@mantine/hooks'
 import { IconUpload, IconPhoto, IconX, IconHash } from '@tabler/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
@@ -24,7 +23,7 @@ import { serverTimestamp } from '~/lib/firebase'
 
 const AddSceneSchema = z.object({
   title: z.string().min(1, { message: 'タイトルを入力してください' }),
-  videoName: z.string().min(1, { message: '動画名を入力してください' }),
+  videoName: z.string(),
 })
 
 type AddSceneType = z.infer<typeof AddSceneSchema>
@@ -35,7 +34,6 @@ type Props = {
 }
 
 export const AddSceneForm = ({ tags, onClose }: Props) => {
-  const [opened, { close, open }] = useDisclosure(false)
   const createScene = useCreateScene()
   const {
     register,
@@ -47,15 +45,6 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const onSubmit: SubmitHandler<AddSceneType> = (data) => {
-    console.log({
-      createdAt: serverTimestamp,
-      likes: 0,
-      screenshotURL: fileURL,
-      tags: selectedTags,
-      title: data.title,
-      updatedAt: serverTimestamp,
-      videoName: data.videoName,
-    })
     createScene({
       createdAt: serverTimestamp,
       likes: 0,
