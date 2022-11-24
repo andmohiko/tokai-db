@@ -28,14 +28,11 @@ const scene = nc<NextApiRequest, NextApiResponse>({
 
   const sceneRef = await db.collection(ScenesCollection).doc(sceneId).get()
   const scene = sceneRef.data() as Scene
-  const screenshotUrl = scene.screenshotURL
 
   res.status(200).json({
     status: 200,
     message: `Success getting ${sceneId}`,
-    data: {
-      screenshotUrl,
-    },
+    data: scene,
   })
 })
 
