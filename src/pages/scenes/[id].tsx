@@ -42,7 +42,7 @@ const SceneDetailPage = () => {
   return (
     <NoPlusLayout>
       <Head>
-        <meta property="og:url" content="https://tokai-db.vercel.app/" />
+        <meta property="og:url" content={scene.screenshotURL} />
       </Head>
 
       <Stack
