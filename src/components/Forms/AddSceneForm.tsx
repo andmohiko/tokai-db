@@ -1,49 +1,64 @@
+import { useState } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  Group,
-  Text,
   Button,
-  Stack,
-  TextInput,
-  Title,
+  Group,
   Image,
+  MultiSelect,
+  Stack,
+  Text,
+  TextInput,
+  Title
 } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 
+import { TagUI } from '~/entities'
 import { useFileInput } from '~/hooks/useFileInput'
 import { useCreateScene } from '~/hooks/useScenes'
 import { serverTimestamp } from '~/lib/firebase'
 
-const AddTagSchema = z.object({
+const AddSceneSchema = z.object({
   title: z.string().min(1, { message: 'タイトルを入力してください' }),
   videoName: z.string().min(1, { message: '動画名を入力してください' }),
 })
 
-type AddTagType = z.infer<typeof AddTagSchema>
+type AddSceneType = z.infer<typeof AddSceneSchema>
 
 type Props = {
+  tags: TagUI[]
   onClose: () => void
 }
 
-export const AddSceneForm = ({ onClose }: Props) => {
+export const AddSceneForm = ({ tags, onClose }: Props) => {
   const createScene = useCreateScene()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<AddTagType>({ resolver: zodResolver(AddTagSchema) })
+  } = useForm<AddSceneType>({ resolver: zodResolver(AddSceneSchema) })
 
   const [fileURL, onChange] = useFileInput('/images/scenes/')
+  const [selectedTags, setSelectedTags] = useState<string[]>()
 
-  const onSubmit: SubmitHandler<AddTagType> = (data) => {
+  const onSubmit: SubmitHandler<AddSceneType> = (data) => {
+    console.log({
+      createdAt: serverTimestamp,
+      likes: 0,
+      screenshotURL: fileURL,
+      tags: selectedTags,
+      title: data.title,
+      updatedAt: serverTimestamp,
+      videoName: data.videoName,
+    })
     createScene({
       createdAt: serverTimestamp,
       likes: 0,
       screenshotURL: fileURL,
-      tags: [],
+      tags: selectedTags,
       title: data.title,
       updatedAt: serverTimestamp,
       videoName: data.videoName,
@@ -98,6 +113,16 @@ export const AddSceneForm = ({ onClose }: Props) => {
               placeholder="文理対決でろ過器作るやつ"
               error={errors.videoName?.message}
               {...register('videoName')}
+            />
+            <MultiSelect
+              data={tags.map(t => {
+                return {
+                  value: t.label,
+                  label: t.label
+                }
+              })}
+              label="誰が映ってますか？"
+              onChange={setSelectedTags}
             />
           </Stack>
           <Button type="submit" loading={isSubmitting}>

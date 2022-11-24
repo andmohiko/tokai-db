@@ -1,13 +1,15 @@
 import { Modal } from '@mantine/core'
 
 import { AddSceneForm } from '~/components/Forms/AddSceneForm'
+import { TagUI } from '~/entities'
 
 type Props = {
+  tags: TagUI[]
   opened: boolean
   onClose: () => void
 }
 
-export const AddSceneSheet = ({ opened, onClose }: Props) => (
+export const AddSceneSheet = ({ tags, opened, onClose }: Props) => (
   <Modal
     opened={opened}
     onClose={onClose}
@@ -26,6 +28,6 @@ export const AddSceneSheet = ({ opened, onClose }: Props) => (
       overflow: 'hidden',
     }}
   >
-    <AddSceneForm onClose={onClose} />
+    <AddSceneForm tags={tags} onClose={onClose} />
   </Modal>
 )
