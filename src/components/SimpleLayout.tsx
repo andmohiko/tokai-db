@@ -1,6 +1,8 @@
 import { AppShell, Group, Header, Stack, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 
+import Footer from './Footer'
+
 import { AddSceneSheet } from '~/components/BottomSheets/AddSceneSheet'
 import { HeadComponent } from '~/components/Head'
 import { PlusButton } from '~/components/PlusButton'
@@ -39,6 +41,8 @@ export const SimpleLayout = ({ children, tags }: Props) => {
         >
           {children}
         </Stack>
+
+        <Footer />
 
         <AddSceneSheet tags={tags} opened={opened} onClose={handlers.close} />
       </AppShell>

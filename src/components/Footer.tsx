@@ -1,11 +1,17 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import { Stack } from "@mantine/core"
 
 const Footer = (): React.ReactElement => {
   return (
-    <Flex>
+    <Stack>
       <hr />
-      <small>andmohiko 2022</small>
-    </Flex>
+      <p
+        style={{
+          textAlign: 'center'
+        }}
+      >
+        <small>© 2022 andmohiko</small>
+      </p>
+    </Stack>
   )
 }
 
