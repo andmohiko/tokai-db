@@ -10,10 +10,12 @@ export const HeadComponent = () => (
     <meta property="og:title" content="東海DB" />
     <meta property="og:description" content="東海オンエア スクショ" />
     <meta property="og:site_name" content="東海DB" />
-    <meta property="og:image" content="/tokaidb.png" />
+    <meta
+      property="og:image"
+      content="https://tokai-db.vercel.app/tokaidb.png"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="andmohiko" />
-    <meta name="twitter:creator" content="andmohiko" />
+    <meta name="twitter:site" content="@andmohiko" />
   </Head>
 )
