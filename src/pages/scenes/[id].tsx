@@ -43,7 +43,7 @@ const SceneDetailPage = ({ screenshotURL }: any) => {
   return (
     <NoPlusLayout>
       <Head>
-        <meta property="og:url" content={scene.screenshotURL} />
+        <meta property="og:image" content={scene.screenshotURL} />
       </Head>
 
       <Stack
