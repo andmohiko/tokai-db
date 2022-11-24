@@ -3,12 +3,12 @@ import { MantineProvider } from '@mantine/core'
 
 import type { AppProps } from 'next/app'
 
-// import { HeadComponent } from '~/components/Head'
+import { HeadComponent } from '~/components/Head'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <>
-      {/* <HeadComponent /> */}
+      <HeadComponent />
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
