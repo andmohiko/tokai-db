@@ -34,7 +34,9 @@ export const SceneDetailCard = ({ scene }: Props): React.ReactElement => {
           ))}
         </Group>
       </Stack>
-      <TweetButton shareUrl={'#'} />
+      <TweetButton
+        shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
+      />
     </Stack>
   )
 }
