@@ -1,5 +1,6 @@
 import { Tag } from '@chakra-ui/react'
-import { TagUI } from '@/entities'
+
+import { TagUI } from '~/entities'
 
 interface TagButtonProps {
   tag: TagUI
