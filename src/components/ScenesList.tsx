@@ -12,7 +12,7 @@ import { sceneFactory } from '~/hooks/useScenes'
 import { db } from '~/lib/firebase'
 import { isDefined } from '~/utils/type'
 
-const PAGE_SIZE = 3
+const PAGE_SIZE = 30
 
 export const ScenesList = () => {
   const [scenes, setScenes] = useState<Scene[]>()
