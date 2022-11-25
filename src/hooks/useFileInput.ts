@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { v4 as uuid } from 'uuid'
 
 import type { FileWithPath } from 'react-dropzone'
 
@@ -19,8 +20,9 @@ export const useFileInput = (
       }
 
       const file = files[0]
+      const filename = uuid()
       try {
-        const fileURL = await uploadImage(`${path}/${file.path}`, file)
+        const fileURL = await uploadImage(`${path}/${filename}`, file)
         setFileURL(fileURL)
         return fileURL
       } catch {
