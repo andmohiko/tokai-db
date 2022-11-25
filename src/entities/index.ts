@@ -31,6 +31,7 @@ export interface Scene {
   tags: Tag['label'][]
   title: string
   updatedAt: Date
+  userId: DocId | null
   videoName: string
 }
 
@@ -41,6 +42,7 @@ export interface CreateSceneDto {
   tags: Scene['tags']
   title: Scene['title']
   updatedAt: FieldValue
+  userId: Scene['userId']
   videoName: Scene['videoName']
 }
 
