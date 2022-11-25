@@ -8,8 +8,13 @@ interface Props {
 }
 
 export const SceneCard = ({ scene }: Props): React.ReactElement => (
-  <Stack spacing="xs">
-    <Image src={scene.screenshotURL} alt={scene.title} />
+  <Stack spacing="xs" align="center">
+    <Image
+      src={scene.screenshotURL}
+      alt={scene.title}
+      height={150}
+      width="auto"
+    />
     <Text size="xl">{scene.title}</Text>
     <Group spacing="xs">
       {scene.tags.map((tag) => (
