@@ -38,13 +38,10 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<AddSceneType>({ resolver: zodResolver(AddSceneSchema) })
 
-  const [fileURL, onChange] = useFileInput(
-    '/images/scenes/',
-    'https://firebasestorage.googleapis.com/v0/b/tokai-db.appspot.com/o/images%2Fscenes%2FED%E3%81%AE%E3%81%A6%E3%81%A4%E3%82%84_640x360.png?alt=media&token=6d373e0e-96a9-4c52-95f6-5f3718d138da',
-  )
+  const [fileURL, onChange] = useFileInput('/images/scenes/')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const onSubmit: SubmitHandler<AddSceneType> = (data) => {
@@ -145,7 +142,11 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
               </Text>
             </Stack>
           </Stack>
-          <Button type="submit" loading={isSubmitting}>
+          <Button
+            type="submit"
+            loading={isSubmitting}
+            disabled={!(fileURL && isValid)}
+          >
             作成する
           </Button>
         </Stack>
