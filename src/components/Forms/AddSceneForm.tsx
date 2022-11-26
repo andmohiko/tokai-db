@@ -13,7 +13,14 @@ import {
   Title,
 } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
-import { IconUpload, IconPhoto, IconX, IconHash } from '@tabler/icons'
+import { showNotification } from '@mantine/notifications'
+import {
+  IconCheck,
+  IconUpload,
+  IconPhoto,
+  IconX,
+  IconHash,
+} from '@tabler/icons'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -55,6 +62,11 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
       updatedAt: serverTimestamp,
       userId: null,
       videoName: data.videoName,
+    })
+    showNotification({
+      message: 'スクショを追加しました',
+      icon: <IconCheck />,
+      radius: 'lg',
     })
     onClose()
   }
