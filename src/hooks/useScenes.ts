@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import {
-  collection,
-  addDoc,
-  doc,
-  Firestore,
-} from 'firebase/firestore'
+import { collection, addDoc, doc, Firestore } from 'firebase/firestore'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
 import type { DocumentData } from 'firebase/firestore'
@@ -75,6 +70,7 @@ export const sceneFactory = (doc: DocumentData): Scene | undefined => {
     tags: data.tags,
     title: data.title,
     updatedAt: data.updatedAt,
+    userId: data.userId,
     videoName: data.videoName,
-  }
+  } as Scene
 }
