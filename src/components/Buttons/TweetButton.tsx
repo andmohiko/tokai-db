@@ -26,7 +26,7 @@ export const TweetButton = ({ shareUrl }: Props) => {
           backgroundColor: '#00acee',
           border: 0,
           fontSize: 12,
-          height: 22,
+          height: 28,
           paddingLeft: 10,
           paddingRight: 10,
           width: 100,

@@ -1,5 +1,7 @@
 import { Group, Image, Stack, Text } from '@mantine/core'
 
+import { CopyLinkButton } from './Buttons/CopyLinkButton'
+
 import { TagLabel } from '~/components/Buttons/TagButton'
 import { TweetButton } from '~/components/Buttons/TweetButton'
 import { Scene } from '~/entities'
@@ -34,9 +36,14 @@ export const SceneDetailCard = ({ scene }: Props): React.ReactElement => {
           ))}
         </Group>
       </Stack>
-      <TweetButton
-        shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
-      />
+      <Group>
+        <TweetButton
+          shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
+        />
+        <CopyLinkButton
+          shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
+        />
+      </Group>
     </Stack>
   )
 }
