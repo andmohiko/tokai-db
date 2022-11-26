@@ -12,7 +12,7 @@ export const SceneCard = ({ scene }: Props): React.ReactElement => (
     <Image
       src={scene.screenshotURL}
       alt={scene.title}
-      height={150}
+      height={190}
       width="auto"
     />
     <Text size="xl">{scene.title}</Text>
