@@ -10,11 +10,13 @@ import { storage } from '~/lib/firebase'
 export const useFileInput = (
   path: string,
   defaultValue = '',
-): [string, (files: FileWithPath[]) => Promise<string>] => {
-  const [fileURL, setFileURL] = useState(defaultValue)
+): [string, (files: FileWithPath[]) => Promise<string>, boolean] => {
+  const [fileURL, setFileURL] = useState<string>(defaultValue)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const onChange = useCallback(
     async (files: FileWithPath[]): Promise<string> => {
+      setLoading(true)
       if (!files || files.length === 0) {
         return ''
       }
@@ -24,16 +26,18 @@ export const useFileInput = (
       try {
         const fileURL = await uploadImage(`${path}/${filename}`, file)
         setFileURL(fileURL)
+        setLoading(false)
         return fileURL
       } catch {
         console.log('error upload file')
       }
+      setLoading(false)
       return ''
     },
     [path, setFileURL],
   )
 
-  return [fileURL, onChange]
+  return [fileURL, onChange, loading]
 }
 
 const uploadImage = async (path: string, blob: Blob): Promise<string> => {
