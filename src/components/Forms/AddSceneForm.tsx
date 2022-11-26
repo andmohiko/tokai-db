@@ -52,6 +52,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
       tags: selectedTags,
       title: data.title,
       updatedAt: serverTimestamp,
+      userId: null,
       videoName: data.videoName,
     })
     onClose()
