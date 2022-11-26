@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { MantineProvider } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 
 import type { AppProps } from 'next/app'
 
@@ -17,9 +18,11 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
           colorScheme: 'light',
         }}
       >
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
+        <NotificationsProvider position="top-center">
+          <ChakraProvider>
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </>
   )
