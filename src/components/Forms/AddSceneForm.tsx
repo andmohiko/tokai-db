@@ -5,6 +5,7 @@ import {
   Button,
   Group,
   Image,
+  LoadingOverlay,
   MultiSelect,
   Stack,
   Text,
@@ -41,7 +42,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<AddSceneType>({ resolver: zodResolver(AddSceneSchema) })
 
-  const [fileURL, onChange] = useFileInput('/images/scenes/')
+  const [fileURL, onChange, loading] = useFileInput('/images/scenes/')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const onSubmit: SubmitHandler<AddSceneType> = (data) => {
@@ -100,6 +101,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
                   <Text size="xl" inline>
                     画像をアップロードしてください
                   </Text>
+                  {loading && <LoadingOverlay visible />}
                 </Group>
               )}
             </Dropzone>
