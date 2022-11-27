@@ -15,7 +15,7 @@ export default class TagRepository {
       .get()
     const doc = snapshot.docs[0]
 
-    if (!doc.data()) {
+    if (!doc?.data()) {
       return undefined
     }
 

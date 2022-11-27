@@ -40,6 +40,6 @@ export interface UpdateSceneFormDto {
 }
 
 export interface UpdateTagDto {
-  scenesCount: admin.firestore.FieldValue
+  scenesCount?: admin.firestore.FieldValue
   updatedAt: admin.firestore.FieldValue
 }

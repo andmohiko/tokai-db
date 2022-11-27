@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin'
+// import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 
 import { db, serverTimestamp } from '../firestore'
@@ -15,21 +15,27 @@ const onCreateScene = functions.firestore.document('scenes/{sceneId}').onCreate(
     if (!newValue) return
 
     const sceneId = context.params.sceneId
-    const scene = await sceneRepository.fetchById(sceneId)
-    if (!scene) return
 
-    const batch = db.batch()
-    scene.tags.forEach(async (label) => {
-      const tag = await tagRepository.fetchByLabel(label)
-      if (!tag) {
-        return
-      }
+    try {
+      const scene = await sceneRepository.fetchById(sceneId)
+      if (!scene) return
 
-      tagRepository.updateByBatch(batch, tag.tagId, {
-        scenesCount: admin.firestore.FieldValue.increment(1),
-        updatedAt: serverTimestamp,
+      const batch = db.batch()
+      scene.tags.forEach(async (label) => {
+        const tag = await tagRepository.fetchByLabel(label)
+        if (!tag) {
+          return
+        }
+
+        tagRepository.updateByBatch(batch, tag.tagId, {
+          scenesCount: admin.firestore.FieldValue.increment(1),
+          updatedAt: serverTimestamp,
+        })
       })
-    })
+      await batch.commit()
+    } catch (e) {
+      console.error(e)
+    }
   }),
 )
 
