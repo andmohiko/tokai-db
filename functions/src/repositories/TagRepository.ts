@@ -21,7 +21,7 @@ export default class TagRepository {
 
     return {
       tagId: doc.id,
-      ...convertDate(doc.data()!, dateColumn),
+      ...convertDate(doc.data(), dateColumn),
     } as Tag
   }
 
