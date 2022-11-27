@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app'
 import {
   getFirestore,
   serverTimestamp as getServerTimestamp,
+  connectFirestoreEmulator,
 } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
@@ -19,3 +20,7 @@ export const db = getFirestore()
 export const serverTimestamp = getServerTimestamp()
 export const storage = getStorage()
 export default firebaseApp
+
+if (process.env.USE_EMULATOR === 'true') {
+  connectFirestoreEmulator(db, 'localhost', 8080)
+}
