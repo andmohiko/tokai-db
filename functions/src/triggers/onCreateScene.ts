@@ -21,7 +21,7 @@ const onCreateScene = functions.firestore.document('scenes/{sceneId}').onCreate(
       if (!scene) return
 
       const batch = db.batch()
-      scene.tags.forEach(async (label) => {
+      for (const label of scene.tags) {
         const tag = await tagRepository.fetchByLabel(label)
         if (!tag) {
           return
@@ -31,7 +31,7 @@ const onCreateScene = functions.firestore.document('scenes/{sceneId}').onCreate(
           scenesCount: admin.firestore.FieldValue.increment(1),
           updatedAt: serverTimestamp,
         })
-      })
+      }
       await batch.commit()
     } catch (e) {
       console.error(e)
