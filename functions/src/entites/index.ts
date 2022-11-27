@@ -7,7 +7,7 @@ export const ScenesCollection = 'scenes'
 export const TagsCollection = 'tags'
 
 export interface Tag {
-  tagID: DocId
+  tagId: DocId
   createdAt: Date
   label: string
   scenesCount: number
@@ -15,7 +15,7 @@ export interface Tag {
 }
 
 export interface TagUI {
-  tagID: Tag['tagID']
+  tagId: Tag['tagId']
   createdAt: Tag['createdAt']
   isActive: boolean
   label: Tag['label']
@@ -39,6 +39,7 @@ export interface UpdateSceneFormDto {
   updatedAt: admin.firestore.FieldValue
 }
 
-export interface UpdateTagFormDto {
+export interface UpdateTagDto {
+  scenesCount: admin.firestore.FieldValue
   updatedAt: admin.firestore.FieldValue
 }
