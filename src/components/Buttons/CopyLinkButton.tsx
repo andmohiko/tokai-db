@@ -13,7 +13,6 @@ type Props = {
 export const CopyLinkButton = ({ scene }: Props) => {
   const theme = useMantineTheme()
   const updateScene = useUpdateScene()
-  console.log(scene)
   const shareUrl = `https://tokai-db.vercel.app/scenes/${scene.sceneId}`
 
   return (
