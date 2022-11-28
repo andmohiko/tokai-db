@@ -6,6 +6,7 @@ import SceneRepository from '../repositories/SceneRepository'
 import TagRepository from '../repositories/TagRepository'
 import { triggerOnce } from '../utils/triggerOnce'
 
+const bucketId = functions.config().storage.bucket
 const sceneRepository = new SceneRepository()
 const tagRepository = new TagRepository()
 const imagePath = 'images/scenes/'
