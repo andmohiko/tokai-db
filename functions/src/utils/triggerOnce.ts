@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin'
 import { EventContext } from 'firebase-functions'
 
-import { db, serverTimestamp } from '../firestore'
+import { db, serverTimestamp } from '../firebase'
 
 const hasAlreadyTriggered = (
   eventID: string,

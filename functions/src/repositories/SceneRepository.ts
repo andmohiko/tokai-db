@@ -1,5 +1,5 @@
 import { DocId, Scene, ScenesCollection } from '../entites'
-import { db } from '../firestore'
+import { db } from '../firebase'
 import { convertDate } from '../utils/date'
 
 const dateColumn = ['createdAt', 'deletedAt']

@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin'
 
 import { DocId, Tag, TagsCollection, UpdateTagDto } from '../entites'
-import { db } from '../firestore'
+import { db } from '../firebase'
 import { convertDate } from '../utils/date'
 
 const dateColumn = ['createdAt', 'deletedAt']
