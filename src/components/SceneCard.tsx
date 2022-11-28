@@ -14,9 +14,15 @@ export const SceneCard = ({ scene }: Props): React.ReactElement => (
       alt={scene.title}
       height={190}
       width="auto"
+      withPlaceholder
     />
     <Text size="xl">{scene.title}</Text>
-    <Group spacing="xs">
+    <Group
+      spacing="xs"
+      style={{
+        maxWidth: 360,
+      }}
+    >
       {scene.tags.map((tag) => (
         <TagLabel key={tag} tagLabel={tag} />
       ))}
