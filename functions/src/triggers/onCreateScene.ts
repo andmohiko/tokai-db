@@ -6,9 +6,10 @@ import SceneRepository from '../repositories/SceneRepository'
 import TagRepository from '../repositories/TagRepository'
 import { triggerOnce } from '../utils/triggerOnce'
 
+const bucketId = functions.config().storage.bucket
 const sceneRepository = new SceneRepository()
 const tagRepository = new TagRepository()
-const imagePath = '/images/scenes/'
+const imagePath = 'images/scenes/'
 
 const onCreateScene = functions.firestore.document('scenes/{sceneId}').onCreate(
   triggerOnce('onCreateScene', async (snap, context) => {
@@ -36,17 +37,25 @@ const onCreateScene = functions.firestore.document('scenes/{sceneId}').onCreate(
         })
       }
 
-      // 画像のリサイズ更新
-      // 画像名の取得
+      // リサイズされた画像に置き換える
       const imageFilename = scene.screenshotURL.slice(85, 121)
       const resizedImageFilenamae = `${imageFilename}_640x360`
-      // リサイズ後の画像の検索
-      const file = bucket.file(`${imagePath}${resizedImageFilenamae}`)
-      // リンクの置き換え
-      console.log(file)
-      // 元画像の削除
+      const ref = bucket.file(`${imagePath}${resizedImageFilenamae}`)
+      const [metadata] = await ref.getMetadata()
+      const token = metadata.metadata.firebaseStorageDownloadTokens
+      const resizedImageUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketId}/o/${encodeURIComponent(
+        `${imagePath}${resizedImageFilenamae}`,
+      )}?alt=media&token=${token}`
+
+      sceneRepository.updateByBatch(batch, scene.sceneId, {
+        screenshotURL: resizedImageUrl,
+        updatedAt: serverTimestamp,
+      })
 
       await batch.commit()
+
+      // 元画像の削除
+      await bucket.file(`${imagePath}${imageFilename}`).delete()
     } catch (e) {
       console.error(e)
     }
