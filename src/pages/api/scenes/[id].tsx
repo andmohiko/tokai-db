@@ -27,7 +27,10 @@ const scene = nc<NextApiRequest, NextApiResponse>({
   }
 
   const sceneRef = await db.collection(ScenesCollection).doc(sceneId).get()
-  const scene = sceneRef.data() as Scene
+  const scene = {
+    sceneId: sceneId,
+    ...sceneRef.data(),
+  } as Scene
 
   res.status(200).json({
     status: 200,

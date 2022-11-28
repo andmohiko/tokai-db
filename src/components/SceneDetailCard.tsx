@@ -40,9 +40,7 @@ export const SceneDetailCard = ({ scene }: Props): React.ReactElement => {
         <TweetButton
           shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
         />
-        <CopyLinkButton
-          shareUrl={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
-        />
+        <CopyLinkButton scene={scene} />
       </Group>
     </Stack>
   )

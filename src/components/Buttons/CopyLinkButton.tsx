@@ -1,12 +1,20 @@
 import { CopyButton, ActionIcon, Tooltip, useMantineTheme } from '@mantine/core'
 import { IconCopy, IconCheck } from '@tabler/icons'
+import { increment } from 'firebase/firestore'
+
+import { Scene } from '~/entities'
+import { useUpdateScene } from '~/hooks/useScenes'
+import { serverTimestamp } from '~/lib/firebase'
 
 type Props = {
-  shareUrl: string
+  scene: Scene
 }
 
-export const CopyLinkButton = ({ shareUrl }: Props) => {
+export const CopyLinkButton = ({ scene }: Props) => {
   const theme = useMantineTheme()
+  const updateScene = useUpdateScene()
+  const shareUrl = `https://tokai-db.vercel.app/scenes/${scene.sceneId}`
+
   return (
     <CopyButton value={shareUrl} timeout={2000}>
       {({ copied, copy }) => (
@@ -17,7 +25,13 @@ export const CopyLinkButton = ({ shareUrl }: Props) => {
         >
           <ActionIcon
             color={copied ? 'teal' : 'gray'}
-            onClick={copy}
+            onClick={() => {
+              copy()
+              updateScene(scene.sceneId, {
+                shares: increment(1),
+                updatedAt: serverTimestamp,
+              })
+            }}
             style={{
               border: '1px solid',
               borderColor: copied ? theme.colors.teal[4] : theme.colors.gray[5],

@@ -6,10 +6,11 @@ service cloud.firestore {
     }
     match /scenes/{sceneId} {
       allow read;
-      allow create: if requestData().size() == 8
+      allow create, update: if requestData().size() == 9
                         && 'createdAt' in requestData() && requestData().createdAt is timestamp
                         && 'likes' in requestData() && requestData().likes is number
                         && 'screenshotURL' in requestData() && requestData().screenshotURL is string
+                        && 'shares' in requestData() && requestData().shares is number
                         && 'tags' in requestData() && requestData().tags is list
                         && 'title' in requestData() && requestData().title is string
                         && 'updatedAt' in requestData() && requestData().updatedAt is timestamp

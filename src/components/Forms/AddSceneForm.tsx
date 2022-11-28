@@ -57,6 +57,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
       createdAt: serverTimestamp,
       likes: 0,
       screenshotURL: fileURL,
+      shares: 0,
       tags: selectedTags,
       title: data.title,
       updatedAt: serverTimestamp,
