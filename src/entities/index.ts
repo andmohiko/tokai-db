@@ -28,6 +28,7 @@ export interface Scene {
   createdAt: Date
   likes: number
   screenshotURL: string
+  shares: number
   tags: Tag['label'][]
   title: string
   updatedAt: Date
@@ -39,6 +40,7 @@ export interface CreateSceneDto {
   createdAt: FieldValue
   likes: Scene['likes']
   screenshotURL: Scene['screenshotURL']
+  shares: Scene['shares']
   tags: Scene['tags']
   title: Scene['title']
   updatedAt: FieldValue
@@ -49,6 +51,11 @@ export interface CreateSceneDto {
 export interface CreateSceneFormDto {
   title: Scene['title']
   videoName?: Scene['videoName']
+}
+
+export interface UpdateSceneDto {
+  shares?: FieldValue
+  updatedAt: FieldValue
 }
 
 export interface CreateTagDto {

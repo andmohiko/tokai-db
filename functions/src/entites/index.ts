@@ -28,6 +28,7 @@ export interface Scene {
   createdAt: Date
   likes: number
   screenshotURL: string
+  shares: number
   tags: Tag['label'][]
   title: string
   updatedAt: Date
