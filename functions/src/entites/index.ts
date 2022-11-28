@@ -36,6 +36,7 @@ export interface Scene {
 }
 
 export interface UpdateSceneFormDto {
+  screenshotURL?: Scene['screenshotURL']
   updatedAt: admin.firestore.FieldValue
 }
 
