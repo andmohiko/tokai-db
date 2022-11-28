@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react'
 
-import { collection, addDoc, doc, Firestore } from 'firebase/firestore'
+import {
+  collection,
+  addDoc,
+  doc,
+  Firestore,
+  updateDoc,
+} from 'firebase/firestore'
 import { useDocument } from 'react-firebase-hooks/firestore'
 
 import type { DocumentData } from 'firebase/firestore'
 
-import { CreateSceneDto, Scene } from '~/entities'
+import { CreateSceneDto, DocId, Scene, UpdateSceneDto } from '~/entities'
 import { db } from '~/lib/firebase'
 // import { isDefined } from '~/utils/type'
 // import { convertDate } from '../utils/date'
@@ -56,6 +62,15 @@ export const useCreateScene = () => {
     return sceneRef.id
   }
   return createScene
+}
+
+export const useUpdateScene = () => {
+  const updateScene = async (sceneId: DocId, dto: UpdateSceneDto) => {
+    await updateDoc(doc(db, ScenesCollection, sceneId), {
+      ...dto,
+    })
+  }
+  return updateScene
 }
 
 export const sceneFactory = (doc: DocumentData): Scene | undefined => {
