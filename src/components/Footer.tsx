@@ -1,8 +1,14 @@
-import { useTheme } from '@chakra-ui/react'
-import { Anchor, Divider, Group, Stack, Text } from '@mantine/core'
+import {
+  Anchor,
+  Divider,
+  Group,
+  Stack,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
 
 const Footer = (): React.ReactElement => {
-  const theme = useTheme()
+  const theme = useMantineTheme()
   return (
     <Stack>
       <Divider />

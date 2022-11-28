@@ -1,4 +1,3 @@
-import { ChakraProvider } from '@chakra-ui/react'
 import { MantineProvider } from '@mantine/core'
 import { NotificationsProvider } from '@mantine/notifications'
 
@@ -19,9 +18,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
         }}
       >
         <NotificationsProvider position="top-center">
-          <ChakraProvider>
-            <Component {...pageProps} />
-          </ChakraProvider>
+          <Component {...pageProps} />
         </NotificationsProvider>
       </MantineProvider>
     </>

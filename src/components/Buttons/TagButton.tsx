@@ -1,15 +1,15 @@
-import { Tag } from '@chakra-ui/react'
+import { Badge } from '@mantine/core'
 
 import { TagUI } from '~/entities'
 
 interface TagButtonProps {
   tag: TagUI
-  selectTag: any
+  selectTag: (tag: TagUI) => void
 }
 
 export const TagButton = ({
   tag,
-  selectTag
+  selectTag,
 }: TagButtonProps): React.ReactElement => {
   return (
     <button onClick={() => selectTag(tag)} type="button">
@@ -25,7 +25,7 @@ interface TagLabelProps {
 
 export const TagLabel = ({
   tagLabel,
-  isActive = false
+  isActive = false,
 }: TagLabelProps): React.ReactElement => {
   const focusedColor = 'red'
   let tagColor = 'gray'
@@ -53,11 +53,16 @@ export const TagLabel = ({
   }
 
   return (
-    <Tag
-      colorScheme={isActive ? focusedColor : tagColor}
-      variant={isActive ? 'solid' : 'subtle'}
+    <Badge
+      color={isActive ? focusedColor : tagColor}
+      variant={isActive ? 'filled' : 'light'}
+      radius="sm"
+      style={{
+        fontSize: 13,
+        padding: 4,
+      }}
     >
       {tagLabel}
-    </Tag>
+    </Badge>
   )
 }
