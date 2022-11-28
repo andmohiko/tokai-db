@@ -126,7 +126,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
             />
             <TextInput
               label="どの動画？"
-              placeholder="文理対決でろ過器作るやつ"
+              placeholder="文理対決でろ過器作る動画"
               error={errors.videoName?.message}
               {...register('videoName')}
             />
@@ -144,7 +144,7 @@ export const AddSceneForm = ({ tags, onClose }: Props) => {
                 })}
                 searchable
                 dropdownPosition="top"
-                label="誰が映っていますか？"
+                label="誰が映ってる？"
                 icon={<IconHash size={15} />}
                 onChange={setSelectedTags}
               />

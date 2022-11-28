@@ -5,10 +5,15 @@ type Props = {
   shareUrl: string
 }
 
+const hashtags = ['東海DB', '東海オンエア']
+
 export const TweetButton = ({ shareUrl }: Props) => {
   const createShareUrl = (url: string): string => {
     const shareUrl = new URL('http://twitter.com/share')
-    const urlParams = [['url', url]]
+    const urlParams = [
+      ['url', url],
+      ['hashtags', hashtags.join(',')],
+    ]
     const params = new URLSearchParams(urlParams)
     shareUrl.search = params.toString()
     return shareUrl.toString()
