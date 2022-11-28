@@ -31,6 +31,8 @@ export default class TagRepository {
     dto: UpdateTagDto,
   ): void {
     const ref = db.collection(TagsCollection).doc(tagId)
-    batch.update(ref, dto)
+    batch.update(ref, {
+      ...dto,
+    })
   }
 }
