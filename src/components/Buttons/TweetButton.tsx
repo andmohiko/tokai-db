@@ -1,13 +1,21 @@
 import { Button } from '@mantine/core'
 import { IconBrandTwitter } from '@tabler/icons'
+import { increment } from 'firebase/firestore'
+
+import { Scene } from '~/entities'
+import { useUpdateScene } from '~/hooks/useScenes'
+import { serverTimestamp } from '~/lib/firebase'
 
 type Props = {
-  shareUrl: string
+  scene: Scene
 }
 
 const hashtags = ['東海スクショDB', '東海オンエア']
 
-export const TweetButton = ({ shareUrl }: Props) => {
+export const TweetButton = ({ scene }: Props) => {
+  const updateScene = useUpdateScene()
+  const shareUrl = `https://tokai-db.vercel.app/scenes/${scene.sceneId}`
+
   const createShareUrl = (url: string): string => {
     const shareUrl = new URL('http://twitter.com/share')
     const urlParams = [
@@ -25,6 +33,12 @@ export const TweetButton = ({ shareUrl }: Props) => {
       target="_blank"
       rel="noopener noreferrer"
       href={createShareUrl(shareUrl)}
+      onClick={() => {
+        updateScene(scene.sceneId, {
+          shares: increment(1),
+          updatedAt: serverTimestamp,
+        })
+      }}
       leftIcon={<IconBrandTwitter size={15} />}
       styles={(theme) => ({
         root: {
