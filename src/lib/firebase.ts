@@ -1,3 +1,4 @@
+import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import {
   getFirestore,
@@ -19,6 +20,7 @@ const firebaseApp = initializeApp(config)
 export const db = getFirestore()
 export const serverTimestamp = getServerTimestamp()
 export const storage = getStorage()
+export const analytics = getAnalytics()
 export default firebaseApp
 
 if (process.env.USE_EMULATOR === 'true') {
