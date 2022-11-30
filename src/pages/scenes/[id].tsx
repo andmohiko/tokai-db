@@ -17,12 +17,12 @@ const SceneDetailPage = ({ scene }: Props) => (
         property="og:url"
         content={`https://tokai-db.vercel.app/scenes/${scene.sceneId}`}
       />
-      <meta property="og:title" content={`東海DB | ${scene.title}`} />
+      <meta property="og:title" content={`東海スクショDB | ${scene.title}`} />
       <meta
         property="og:description"
         content={scene.videoName ?? '東海オンエアのすきなシーンを保存できます'}
       />
-      <meta property="og:site_name" content="東海DB" />
+      <meta property="og:site_name" content="東海スクショDB" />
       <meta property="og:image" content={scene.screenshotURL} />
     </Head>
 

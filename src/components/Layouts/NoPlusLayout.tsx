@@ -12,7 +12,7 @@ export const NoPlusLayout = ({ children }: Props) => (
     padding="md"
     header={
       <Header height={60} p="xs">
-        <Title order={1}>東海DB</Title>
+        <Title order={1}>東海スクショDB</Title>
       </Header>
     }
     styles={(theme) => ({

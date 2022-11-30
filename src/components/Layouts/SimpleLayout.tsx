@@ -22,7 +22,7 @@ export const SimpleLayout = ({ children, tags = [] }: Props) => {
         padding="md"
         header={
           <Header height={60} p="xs">
-            <Title order={1}>東海DB</Title>
+            <Title order={1}>東海スクショDB</Title>
           </Header>
         }
         styles={(theme) => ({
@@ -35,9 +35,9 @@ export const SimpleLayout = ({ children, tags = [] }: Props) => {
         <HeadComponent />
         <Head>
           <meta property="og:url" content="https://tokai-db.vercel.app/" />
-          <meta property="og:title" content="東海DB" />
+          <meta property="og:title" content="東海スクショDB" />
           <meta property="og:description" content="東海オンエア スクショ" />
-          <meta property="og:site_name" content="東海DB" />
+          <meta property="og:site_name" content="東海スクショDB" />
           <meta
             property="og:image"
             content="https://tokai-db.vercel.app/tokaidb.png"

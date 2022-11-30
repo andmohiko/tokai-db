@@ -5,7 +5,7 @@ type Props = {
   shareUrl: string
 }
 
-const hashtags = ['東海DB', '東海オンエア']
+const hashtags = ['東海スクショDB', '東海オンエア']
 
 export const TweetButton = ({ shareUrl }: Props) => {
   const createShareUrl = (url: string): string => {
